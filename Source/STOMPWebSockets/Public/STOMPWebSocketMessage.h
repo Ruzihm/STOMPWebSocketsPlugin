@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "STOMPWebSocketClient.h"
+#include "STOMPWebSocketClientObject.h"
 #include "STOMPWebSocketMessage.generated.h"
 
 class IStompMessage;
@@ -15,6 +16,7 @@ class USTOMPWebSocketMessage : public UObject
 	GENERATED_BODY()
 
 	friend USTOMPWebSocketClient;
+	friend USTOMPWebSocketClientObject;
 
 private:
 	const IStompMessage* MyMessage;
