@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"Version": 2,
 	"WhitelistPlatforms": ["Win64", "Win32", "XboxOne", "PS4", "Linux"],
-	"VersionName": "1.1.0",
+	"VersionName": "1.1.1",
 	"FriendlyName": "STOMP Over WebSockets BP",
 	"Description": "Exposes Unreal's stomp/ws communication to blueprinting",
 	"Category": "Networking",
@@ -14,7 +14,7 @@
 	"CanContainContent": true,
 	"IsBetaVersion": false,
 	"Installed": false,
-	"EngineVersion": "4.27.0",
+	"EngineVersion": "5.3.0",
 	"Modules": [
 		{
 			"Name": "STOMPWebSockets",

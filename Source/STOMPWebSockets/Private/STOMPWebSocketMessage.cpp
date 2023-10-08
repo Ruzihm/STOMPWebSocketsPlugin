@@ -29,12 +29,12 @@ FString USTOMPWebSocketMessage::GetBodyAsString() const
 	return MyMessage->GetBodyAsString();
 }
 
-const TArray<UINT8> USTOMPWebSocketMessage::GetRawBody() const
+const TArray<uint8> USTOMPWebSocketMessage::GetRawBody() const
 {
-	return TArray<UINT8>(MyMessage->GetRawBody(), MyMessage->GetRawBodyLength());
+	return TArray<uint8>(MyMessage->GetRawBody(), MyMessage->GetRawBodyLength());
 }
 
-INT32 USTOMPWebSocketMessage::GetRawBodyLength() const
+int32 USTOMPWebSocketMessage::GetRawBodyLength() const
 {
 	return MyMessage->GetRawBodyLength();
 }
