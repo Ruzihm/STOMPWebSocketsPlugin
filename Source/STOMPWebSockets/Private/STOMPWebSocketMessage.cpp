@@ -5,7 +5,6 @@
 
 void USTOMPWebSocketMessage::Ack(const TMap<FName, FString>& Header, const FSTOMPRequestCompleted& CompletionCallback)
 {
-	
 	MyMessage->Ack(Header, FStompRequestCompleted::CreateLambda([CompletionCallback](bool bSuccess, const FString& Error)->void {
 		CompletionCallback.Execute(bSuccess, Error);
 	}));
@@ -17,7 +16,6 @@ void USTOMPWebSocketMessage::Nack(const TMap<FName, FString>& Header, const FSTO
 		CompletionCallback.Execute(bSuccess, Error);
 	}));
 }
-
 
 const TMap<FName, FString>& USTOMPWebSocketMessage::GetHeader() const
 {
@@ -38,7 +36,6 @@ int32 USTOMPWebSocketMessage::GetRawBodyLength() const
 {
 	return MyMessage->GetRawBodyLength();
 }
-
 
 FString USTOMPWebSocketMessage::GetSubscriptionId() const
 {
