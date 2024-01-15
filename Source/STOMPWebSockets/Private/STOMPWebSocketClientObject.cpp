@@ -25,7 +25,6 @@ void USTOMPWebSocketClientObject::SetUrl(FString NewUrl)
 	Url = NewUrl;
 }
 
-
 FString USTOMPWebSocketClientObject::GetUrl()
 {
 	return Url;
@@ -42,11 +41,11 @@ FString USTOMPWebSocketClientObject::GetAuthToken()
 }
 
 /**
-	 * Initiate a client connection to the server.
-	 * Use this after setting up event handlers or to reconnect after connection errors.
-	 *
-	 * @param Header custom headers to send with the initial CONNECT command.
-	 */
+* Initiate a client connection to the server.
+* Use this after setting up event handlers or to reconnect after connection errors.
+*
+* @param Header custom headers to send with the initial CONNECT command.
+*/
 void USTOMPWebSocketClientObject::Connect(const TMap<FName, FString>& Header)
 {
 	StompClient->Connect(Header);
@@ -134,10 +133,12 @@ void USTOMPWebSocketClientObject::HandleOnConnectionError(const FString& Error)
 {
 	this->OnConnectionError.Broadcast(Error);
 }
+
 void USTOMPWebSocketClientObject::HandleOnError(const FString& Error)
 {
 	this->OnError.Broadcast(Error);
 }
+
 void USTOMPWebSocketClientObject::HandleOnClosed(const FString& Reason)
 {
 	this->OnClosed.Broadcast(Reason);
