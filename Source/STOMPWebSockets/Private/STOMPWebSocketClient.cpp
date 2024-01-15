@@ -14,7 +14,6 @@ USTOMPWebSocketClient::USTOMPWebSocketClient()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
 	// ...
 }
 
@@ -47,7 +46,6 @@ void USTOMPWebSocketClient::SetAuthToken(FString NewAuthToken)
 	AuthToken = NewAuthToken;
 }
 
-
 FString USTOMPWebSocketClient::GetAuthToken()
 {
 	return AuthToken;
@@ -60,11 +58,11 @@ void USTOMPWebSocketClient::TickComponent(float DeltaTime, ELevelTick TickType, 
 }
 
 /**
-	 * Initiate a client connection to the server.
-	 * Use this after setting up event handlers or to reconnect after connection errors.
-	 *
-	 * @param Header custom headers to send with the initial CONNECT command.
-	 */
+* Initiate a client connection to the server.
+* Use this after setting up event handlers or to reconnect after connection errors.
+*
+* @param Header custom headers to send with the initial CONNECT command.
+*/
 void USTOMPWebSocketClient::Connect(const TMap<FName, FString>& Header)
 {
 	StompClient->Connect(Header);
@@ -152,10 +150,12 @@ void USTOMPWebSocketClient::HandleOnConnectionError(const FString& Error)
 {
 	this->OnConnectionError.Broadcast(Error);
 }
+
 void USTOMPWebSocketClient::HandleOnError(const FString& Error)
 {
 	this->OnError.Broadcast(Error);
 }
+
 void USTOMPWebSocketClient::HandleOnClosed(const FString& Reason)
 {
 	this->OnClosed.Broadcast(Reason);
