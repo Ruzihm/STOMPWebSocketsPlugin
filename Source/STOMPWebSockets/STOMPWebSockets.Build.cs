@@ -27,6 +27,7 @@ public class STOMPWebSockets : ModuleRules
 			{
 				"Core",
                 "Stomp",
+                "WebSockets"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -37,6 +38,8 @@ public class STOMPWebSockets : ModuleRules
 			{
 				"CoreUObject",
 				"Engine",
+				"Slate",
+				"SlateCore",
                 "Stomp",
                 "WebSockets"
 				// ... add private dependencies that you statically link with here ...	

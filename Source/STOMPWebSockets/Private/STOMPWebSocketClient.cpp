@@ -4,9 +4,9 @@
 #include "STOMPWebSocketClient.h"
 #include "WebSocketsModule.h"
 #include "STOMPWebSocketMessage.h"
-#include "IStompMessage.h"
-#include "StompModule.h"
-#include "IStompClient.h"
+#include "Stomp/Public/IStompMessage.h"
+#include "Stomp/Public/StompModule.h"
+#include "Stomp/Public/IStompClient.h"
 
 // Sets default values for this component's properties
 USTOMPWebSocketClient::USTOMPWebSocketClient()
@@ -24,7 +24,7 @@ void USTOMPWebSocketClient::BeginPlay()
 	Super::BeginPlay();
 
 	FStompModule* stompModule = &FStompModule::Get();
-	StompClient = stompModule->CreateClient(Url);
+	StompClient = stompModule->CreateClient(Url, AuthToken);
 
 	StompClient->OnConnected().AddUObject(this, &USTOMPWebSocketClient::HandleOnConnected);
 	StompClient->OnConnectionError().AddUObject(this, &USTOMPWebSocketClient::HandleOnConnectionError);
@@ -32,6 +32,26 @@ void USTOMPWebSocketClient::BeginPlay()
 	StompClient->OnClosed().AddUObject(this, &USTOMPWebSocketClient::HandleOnClosed);
 }
 
+void USTOMPWebSocketClient::SetUrl(FString NewUrl)
+{
+	Url = NewUrl;
+}
+
+FString USTOMPWebSocketClient::GetUrl()
+{
+	return Url;
+}
+
+void USTOMPWebSocketClient::SetAuthToken(FString NewAuthToken)
+{
+	AuthToken = NewAuthToken;
+}
+
+
+FString USTOMPWebSocketClient::GetAuthToken()
+{
+	return AuthToken;
+}
 
 // Called every frame
 void USTOMPWebSocketClient::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

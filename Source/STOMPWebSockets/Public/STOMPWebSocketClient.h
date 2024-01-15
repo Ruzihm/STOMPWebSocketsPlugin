@@ -29,7 +29,6 @@ protected:
 	virtual void BeginPlay() override;
 
 	TSharedPtr<class IStompClient> StompClient;
-
 private:
 	//Wrappers for client events
 	void HandleOnConnected(const FString& ProtocolVersion, const FString& SessionId, const FString& ServerString);
@@ -37,13 +36,26 @@ private:
 	void HandleOnError(const FString& Error);
 	void HandleOnClosed(const FString& Reason);
 
+	UPROPERTY(BlueprintSetter = SetUrl, BlueprintGetter = GetUrl, Category = "Online|STOMP over Websockets")
+	FString Url;
+	UPROPERTY(BlueprintSetter = SetAuthToken, BlueprintGetter = GetAuthToken, Category = "Online|STOMP over Websockets")
+	FString AuthToken;
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	
+	UFUNCTION(BlueprintCallable, BlueprintSetter, Category = "Online|STOMP over Websockets")
+	void SetUrl(FString NewUrl);
 
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category="Online|STOMP over Websockets")
-	FString Url;
+	UFUNCTION(BlueprintCallable, BlueprintGetter, Category = "Online|STOMP over Websockets")
+	FString GetUrl();
 
+	UFUNCTION(BlueprintCallable, BlueprintSetter, Category = "Online|STOMP over Websockets")
+	void SetAuthToken(FString NewAuthToken);
+
+	UFUNCTION(BlueprintCallable, BlueprintGetter, Category = "Online|STOMP over Websockets")
+	FString GetAuthToken();
+	
 	/**
 	 * Initiate a client connection to the server.
 	 * Use this after setting up event handlers or to reconnect after connection errors.

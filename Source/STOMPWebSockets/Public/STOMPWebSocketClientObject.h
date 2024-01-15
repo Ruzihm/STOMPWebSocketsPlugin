@@ -22,22 +22,36 @@ class STOMPWEBSOCKETS_API USTOMPWebSocketClientObject : public UObject
 protected:
 	TSharedPtr<class IStompClient> StompClient;
 
+
 private:
 	//Wrappers for client events
 	void HandleOnConnected(const FString& ProtocolVersion, const FString& SessionId, const FString& ServerString);
 	void HandleOnConnectionError(const FString& Error);
 	void HandleOnError(const FString& Error);
 	void HandleOnClosed(const FString& Reason);
+	UPROPERTY(BlueprintSetter = SetUrl, BlueprintGetter = GetUrl, Category = "Online|STOMP over Websockets")
+	FString Url;
+	UPROPERTY(BlueprintSetter = SetAuthToken, BlueprintGetter = GetAuthToken, Category = "Online|STOMP over Websockets")
+	FString AuthToken;
 
 public:	
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category="Online|STOMP over Websockets")
-	FString Url;
+	UFUNCTION(BlueprintCallable, BlueprintSetter, Category = "Online|STOMP over Websockets")
+	void SetUrl(FString NewUrl);
+
+	UFUNCTION(BlueprintCallable, BlueprintGetter, Category = "Online|STOMP over Websockets")
+	FString GetUrl();
+
+	UFUNCTION(BlueprintCallable, BlueprintSetter, Category = "Online|STOMP over Websockets")
+	void SetAuthToken(FString NewAuthToken);
+
+	UFUNCTION(BlueprintCallable, BlueprintGetter, Category = "Online|STOMP over Websockets")
+	FString GetAuthToken();
 
 	/**
 	 * Initialize STOMP controller
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Online|STOMP over Websockets")
-		void Initialize();
+	void Initialize();
 
 	/**
 	 * Initiate a client connection to the server.
@@ -46,7 +60,7 @@ public:
 	 * @param Header custom headers to send with the initial CONNECT command.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (AutoCreateRefTerm = "Header"), Category = "Online|STOMP over Websockets")
-		void Connect(const TMap<FName, FString>& Header);
+	void Connect(const TMap<FName, FString>& Header);
 
 	/**
 	 * Disconnect from the server.

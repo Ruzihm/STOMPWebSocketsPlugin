@@ -4,20 +4,41 @@
 #include "STOMPWebSocketClientObject.h"
 #include "WebSocketsModule.h"
 #include "STOMPWebSocketMessage.h"
-#include "IStompMessage.h"
-#include "StompModule.h"
-#include "IStompClient.h"
+#include "Stomp/Public/IStompMessage.h"
+#include "Stomp/Public/StompModule.h"
+#include "Stomp/Public/IStompClient.h"
 
 // Called when the game starts
 void USTOMPWebSocketClientObject::Initialize()
 {
 	FStompModule* stompModule = &FStompModule::Get();
-	StompClient = stompModule->CreateClient(Url);
+	StompClient = stompModule->CreateClient(Url, AuthToken);
 
 	StompClient->OnConnected().AddUObject(this, &USTOMPWebSocketClientObject::HandleOnConnected);
 	StompClient->OnConnectionError().AddUObject(this, &USTOMPWebSocketClientObject::HandleOnConnectionError);
 	StompClient->OnError().AddUObject(this, &USTOMPWebSocketClientObject::HandleOnError);
 	StompClient->OnClosed().AddUObject(this, &USTOMPWebSocketClientObject::HandleOnClosed);
+}
+
+void USTOMPWebSocketClientObject::SetUrl(FString NewUrl)
+{
+	Url = NewUrl;
+}
+
+
+FString USTOMPWebSocketClientObject::GetUrl()
+{
+	return Url;
+}
+
+void USTOMPWebSocketClientObject::SetAuthToken(FString NewAuthToken)
+{
+	AuthToken = NewAuthToken;
+}
+
+FString USTOMPWebSocketClientObject::GetAuthToken()
+{
+	return AuthToken;
 }
 
 /**
