@@ -4,9 +4,9 @@
 #include "STOMPWebSocketClient.h"
 #include "WebSocketsModule.h"
 #include "STOMPWebSocketMessage.h"
-#include "Stomp/Public/IStompMessage.h"
-#include "Stomp/Public/StompModule.h"
-#include "Stomp/Public/IStompClient.h"
+#include "IStompMessage.h"
+#include "StompModule.h"
+#include "IStompClient.h"
 
 // Sets default values for this component's properties
 USTOMPWebSocketClient::USTOMPWebSocketClient()
