@@ -48,13 +48,16 @@ public:
 	void SetUrl(FString NewUrl);
 
 	UFUNCTION(BlueprintCallable, BlueprintGetter, Category = "Online|STOMP over Websockets")
-	FString GetUrl();
+	const FString GetUrl();
 
 	UFUNCTION(BlueprintCallable, BlueprintSetter, Category = "Online|STOMP over Websockets")
 	void SetAuthToken(FString NewAuthToken);
 
 	UFUNCTION(BlueprintCallable, BlueprintGetter, Category = "Online|STOMP over Websockets")
-	FString GetAuthToken();
+	const FString GetAuthToken();
+
+	UFUNCTION(BlueprintCallable, Category = "Online|STOMP over Websockets")
+	void BuildClient();
 	
 	/**
 	 * Initiate a client connection to the server.
@@ -77,7 +80,7 @@ public:
 	 * Inquire if this instance is connected to a server.
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Online|STOMP over Websockets")
-	bool IsConnected();
+	const bool IsConnected();
 
 	/**
 	 * Subscribe to an event

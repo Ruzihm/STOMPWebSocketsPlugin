@@ -21,14 +21,6 @@ USTOMPWebSocketClient::USTOMPWebSocketClient()
 void USTOMPWebSocketClient::BeginPlay()
 {
 	Super::BeginPlay();
-
-	FStompModule* stompModule = &FStompModule::Get();
-	StompClient = stompModule->CreateClient(Url, AuthToken);
-
-	StompClient->OnConnected().AddUObject(this, &USTOMPWebSocketClient::HandleOnConnected);
-	StompClient->OnConnectionError().AddUObject(this, &USTOMPWebSocketClient::HandleOnConnectionError);
-	StompClient->OnError().AddUObject(this, &USTOMPWebSocketClient::HandleOnError);
-	StompClient->OnClosed().AddUObject(this, &USTOMPWebSocketClient::HandleOnClosed);
 }
 
 void USTOMPWebSocketClient::SetUrl(FString NewUrl)
@@ -36,7 +28,7 @@ void USTOMPWebSocketClient::SetUrl(FString NewUrl)
 	Url = NewUrl;
 }
 
-FString USTOMPWebSocketClient::GetUrl()
+const FString USTOMPWebSocketClient::GetUrl()
 {
 	return Url;
 }
@@ -46,7 +38,7 @@ void USTOMPWebSocketClient::SetAuthToken(FString NewAuthToken)
 	AuthToken = NewAuthToken;
 }
 
-FString USTOMPWebSocketClient::GetAuthToken()
+const FString USTOMPWebSocketClient::GetAuthToken()
 {
 	return AuthToken;
 }
@@ -56,6 +48,21 @@ void USTOMPWebSocketClient::TickComponent(float DeltaTime, ELevelTick TickType, 
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
+
+/**
+ * Initialize client (locks in URL and authtoken)
+ */
+void USTOMPWebSocketClient::BuildClient()
+{
+	FStompModule* stompModule = &FStompModule::Get();
+	StompClient = stompModule->CreateClient(Url, AuthToken);
+
+	StompClient->OnConnected().AddUObject(this, &USTOMPWebSocketClient::HandleOnConnected);
+	StompClient->OnConnectionError().AddUObject(this, &USTOMPWebSocketClient::HandleOnConnectionError);
+	StompClient->OnError().AddUObject(this, &USTOMPWebSocketClient::HandleOnError);
+	StompClient->OnClosed().AddUObject(this, &USTOMPWebSocketClient::HandleOnClosed);
+}
+
 
 /**
 * Initiate a client connection to the server.
@@ -81,7 +88,7 @@ void USTOMPWebSocketClient::Disconnect(const TMap<FName, FString>& Header)
 /**
  * Inquire if this instance is connected to a server.
  */
-bool USTOMPWebSocketClient::IsConnected()
+const bool USTOMPWebSocketClient::IsConnected()
 {
 	return StompClient->IsConnected();
 }
