@@ -54,6 +54,22 @@ void USTOMPWebSocketClient::TickComponent(float DeltaTime, ELevelTick TickType, 
  */
 void USTOMPWebSocketClient::BuildClient()
 {
+	if (StompClient.IsValid())
+	{
+		if (StompClient.Get()->IsConnected())
+		{
+			StompClient.Get()->Disconnect();
+		}
+
+		StompClient->OnConnected().Clear();
+		StompClient->OnConnectionError().Clear();
+		StompClient->OnError().Clear();
+		StompClient->OnClosed().Clear();	
+
+		delete StompClient.Get();
+	}
+
+	
 	FStompModule* stompModule = &FStompModule::Get();
 	StompClient = stompModule->CreateClient(Url, AuthToken);
 
