@@ -76,7 +76,7 @@ bool USTOMPWebSocketClientObject::IsConnected()
  * @param CompletionCallback Delegate called when the request has been acknowledged by the server or if there is an error.
  * @return a handle to the active subscription. Can be passed to Unsubscribe to unsubscribe from the end point.
  */
-FString USTOMPWebSocketClientObject::Subscribe(const FString& Destination, const FSTOMPSubscriptionEventObject& EventCallback, const FSTOMPRequestCompleted& CompletionCallback)
+FString USTOMPWebSocketClientObject::Subscribe(const FString& Destination, const FSTOMPSubscriptionEventObject& EventCallback, const FSTOMPRequestCompletedObject& CompletionCallback)
 {
 	return StompClient->Subscribe(Destination, 
 		FStompSubscriptionEvent::CreateLambda([this, EventCallback](const IStompMessage& Message)->void {

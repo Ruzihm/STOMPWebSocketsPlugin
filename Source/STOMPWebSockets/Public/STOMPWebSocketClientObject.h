@@ -84,7 +84,7 @@ public:
 	 * @return a handle to the active subscription. Can be passed to Unsubscribe to unsubscribe from the end point.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (AutoCreateRefTerm = "CompletionCallback"), Category = "Online|STOMP over Websockets")
-	FString Subscribe(const FString& Destination, const FSTOMPSubscriptionEventObject& EventCallback, const FSTOMPRequestCompleted& CompletionCallback);
+	FString Subscribe(const FString& Destination, const FSTOMPSubscriptionEventObject& EventCallback, const FSTOMPRequestCompletedObject& CompletionCallback);
 
 	/**
 	 * Unsubscribe from an event
